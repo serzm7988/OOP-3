@@ -39,7 +39,7 @@ void bubbleSort(int list[], int listLength, NOTEBOOK models[])
 
 void write(NOTEBOOK NB)
 {
-    std::ofstream fout("C:\\note2.txt", std::ios::app);
+    std::ofstream fout("note2.txt", std::ios::app);
     if (fout.is_open())
     {
         fout << NB.model << std::endl;
@@ -56,7 +56,7 @@ NOTEBOOK* read()
 {
     int n;
     std::string line;
-    std::ifstream fin("C:\\note.txt");
+    std::ifstream fin("note.txt");
     if (fin.is_open())
     {
         getline(fin, line);
