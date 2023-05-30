@@ -2,7 +2,6 @@
 #include <cmath>
 #include <string>
 #include <iterator>
-#include <list>
 #include "container.cpp"
 
 class Device
@@ -74,6 +73,11 @@ void write_Computer(Computer Device_instance)
     Decorator_Computer dec = Computer(Device_instance);
     std::cout << std::endl << "\t Computer" << std::endl;
     dec.turn_onn();
+}
+void swap(list<Device> y, list<Device> x) {
+    list<Device> z = y;
+    y = x;
+    x = z;
 }
 
 int main() 

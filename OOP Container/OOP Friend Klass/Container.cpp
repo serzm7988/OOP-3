@@ -1,6 +1,4 @@
 
-
-
 #include <iostream>
 
 template <typename T>
@@ -70,6 +68,11 @@ public:
 		}
 
 		T& operator*() const
+		{
+			return the_node;
+		}
+		
+		T& operator->() const
 		{
 			return the_node->val;
 		}
@@ -179,8 +182,7 @@ public:
 		return count;
 	}
 
-	void print() const
-	{
+	void print() const {
 		for (node* dn = head; dn != tail; dn = dn->next)
 		{
 			dn->print_val();
@@ -188,5 +190,9 @@ public:
 
 		std::cout << std::endl;
 	}
-
+	void swap(list x) const {
+		list y = x;
+		x = this;
+		this = y;
+	}
 };
