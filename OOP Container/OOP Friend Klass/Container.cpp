@@ -69,14 +69,8 @@ public:
 
 		T& operator*() const
 		{
-			return the_node;
-		}
-		
-		T& operator->() const
-		{
 			return the_node->val;
 		}
-
 	private:
 		node* the_node;
 

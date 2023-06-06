@@ -1,99 +1,63 @@
 ﻿#include <iostream>
 #include <cmath>
 #include <string>
-#include <iterator>
 #include "container.cpp"
 
-class Device
+class ChiefCrook
 {
+    friend class Member;
 public:
-    friend void write_Device(Device, std::string);
-    friend class Decorator_Device;
-    friend class Decorator_Computer;
+    int bill = 10000;
+    friend class Decorator_Chief;
     int serial_number;
+    int profit() {
+        return bill;
+    }
+    void Get(int money) {
+        bill = bill+money;
+        std::cout << bill;
+    }
 private:
-    void turn_on() {
-        std::cout << "Device is on";
-    }
-    std::string operator+ (int s)
-    {
-        std::string sum = serial_number + "."+  s;
-        return (sum);
-    }
 };
 
-class Computer : private Device {
-    friend class Decorator_Computer;
+class Member : public ChiefCrook {
 public:
-    void say_hello() {
-        std::cout << std::endl << "Welcome to Windows 95!" << std::endl;
+    void transfer(Member& x) {
+        x.Get(bill / 10);
+        bill = (bill / 10) * 9;
+    }
+    void transfer(ChiefCrook& x) {
+        x.Get(bill / 10);
+        bill = (bill / 10) * 9;
     }
 };
 
-class Decorator_Device : public Device {
-protected:
-    Device device_;
-
-public:
-    Decorator_Device(Device device) : device_(device) {
-    }
-    void turn_onn()
-    {
-        std::cout << '[';
-        this->device_.turn_on();
-        std::cout << ']'<<std::endl;;
-    }
-};
-
-class Decorator_Computer : public Computer {
-protected:
-    Computer device_;
-
-public:
-    Decorator_Computer(Computer device) : device_(device) {
-    }
-    void turn_onn()
-    {
-        std::cout << '[';
-        this->device_.turn_on();
-        std::cout << ']';
-    }
-};
-
-void write_Device(Device Device_instance)
-{
-    Decorator_Device dec = Device(Device_instance);
-    std::cout << "\t Device" << std::endl;
-    std::cout << "Serial number is: " << Device_instance.serial_number << std::endl;
-    dec.turn_onn();
-}
-
-void write_Computer(Computer Device_instance)
-{
-    Decorator_Computer dec = Computer(Device_instance);
-    std::cout << std::endl << "\t Computer" << std::endl;
-    dec.turn_onn();
-}
-void swap(list<Device> y, list<Device> x) {
-    list<Device> z = y;
+void swap(list<Member> y, list<Member> x) {
+    list<Member> z = y;
     y = x;
     x = z;
 }
 
 int main() 
 {
-    list<Device> the_list;
-    list<Device>::iterator list_iter;
-
+    ChiefCrook Mafioznik;
+    list<Member> the_list;
+    list<Member>::iterator list_iter;
     for (int i=0; i < 5;i++) {
-        Device Device_instance;
-        Device_instance.serial_number = rand() % 1000 + 1;
-        std::cout << Device_instance.serial_number << std::endl;
-        the_list.add(Device_instance);
+        Member Member_;
+        the_list.add(Member_);
     }
-    write_Device(*the_list.begin());
-    write_Device(*(++the_list.begin()));
-    Computer  Computer_instance;
-    Computer_instance.say_hello();
+    list_iter = the_list.begin();
+    //std::cout << (*list_iter).profit();
+    for (int i = 0; i < 4; i++) {
+        Member x = *list_iter;
+        ++list_iter;
+        Member y = *list_iter;
+        x.transfer(y);
+        *list_iter = y;
+    }
+    Member x = *list_iter;
+    x.transfer(Mafioznik);
+    std::cout << Mafioznik.profit();
     return 0;
 }
