@@ -15,7 +15,6 @@ public:
     }
     void Get(int money) {
         bill = bill+money;
-        std::cout << bill;
     }
 private:
 };
