@@ -24,6 +24,7 @@
     <ProjectGuid>{93fff22c-c557-47f1-bb33-059e4ebb67dc}</ProjectGuid>
     <RootNamespace>OOPFriendKlass</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>pyramid scheme</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
